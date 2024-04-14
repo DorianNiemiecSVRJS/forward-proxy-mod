@@ -49,9 +49,7 @@ Mod.prototype.callback = function callback(req, res, serverconsole, responseEnd,
           req.socket.pipe(socket);
         }).on("error", function (ex) {
           try {
-            if (ex.code == "ENOTFOUND" || ex.code == "EHOSTUNREACH" || ex.code == "ECONNREFUSED") {
-              callServerError(503, "forward-proxy-mod/1.0.0", ex); //Server error
-            } else if (ex.code == "ETIMEDOUT") {
+            if (ex.code == "ETIMEDOUT") {
               callServerError(504, "forward-proxy-mod/1.0.0", ex); //Server error
             } else {
               callServerError(502, "forward-proxy-mod/1.0.0", ex); //Server error
